@@ -1,0 +1,41 @@
+<p>driver-list works!</p>
+
+<table class="table table-dark">   
+    <tbody>
+        <tr *ngFor="let driver of pilotos ">
+            <td>
+                {{driver.name}}
+            </td>
+            <td>
+                {{driver.lastName}}
+            </td>
+            <td>
+                {{driver.age}}
+            </td>
+            <td>
+                {{driver.carNumber}}
+            </td>
+            <td>
+                {{driver.nationality}}
+            </td>
+            <td>
+                {{driver.position}}
+            </td>
+            <td>
+                <button (click)='delete(driver.id)'>X</button>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <input [(ngModel)] = "inputName" placeholder="Name" name = "inputName">
+        <input [(ngModel)] = "inputLastName" type="text" placeholder="LastName">
+        <input [(ngModel)] = "inputAge" type="text" placeholder="Age">
+        <input [(ngModel)] = "inputCarNumber" type="text" placeholder="CarNumber">
+        <input [(ngModel)] = "inputNationality" type="text" placeholder="Nationality">
+        <input [(ngModel)] = "inputPosition" type="text" placeholder="Position">
+        <input [(ngModel)] = "inputTeam" type="text" placeholder="Team">
+        
+        <button (click)='add()' class="addPiloto" >+</button>
+    </tfoot>
+</table>
+
