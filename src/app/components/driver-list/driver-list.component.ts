@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DriverService } from 'src/app/services/driver.service';
 import {Driver} from 'src/app/models/driver';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-driver-list',
@@ -9,7 +10,7 @@ import {Driver} from 'src/app/models/driver';
 })
 export class DriverListComponent implements OnInit{
 
-  constructor(private driverService : DriverService){}
+  constructor(private driverService : DriverService, private modalService : NgbModal){}
   public pilotos : Driver[] = []
 
   inputName = ""
@@ -19,6 +20,16 @@ export class DriverListComponent implements OnInit{
   inputNationality = ""
   inputPosition = ""
   inputTeam = ""
+
+  nameView = ""
+  lastNameView = ""
+  ageView = ""
+  carNumberView = ""
+  nationalityView = ""
+  positionView = ""
+  teamView = ""
+
+
 
   ngOnInit(): void {
       this.driverService.getAll().subscribe(response => {
@@ -50,6 +61,33 @@ export class DriverListComponent implements OnInit{
       location.reload
     }, error =>{
       console.error(error)
+    })
+  }
+
+  view(ver : any, p : Driver){
+
+    this.nameView = p.name
+    this.lastNameView = p.lastName
+    this.ageView = p.age.toString()
+    this.carNumberView = p.carNumber.toString()
+    this.positionView = p.position.toString()
+    this.nationalityView = p.nationality
+
+    this.modalService.open(ver).result.then(() => {
+      let piloto = new Driver()
+      piloto.name = this.nameView
+      piloto.lastName = this.lastNameView
+      piloto.age = parseInt(this.ageView)
+      piloto.carNumber = parseInt(this.carNumberView)
+      piloto.position = parseInt(this.positionView)
+      piloto.nationality = this.nationalityView
+      this.driverService.edit(piloto, piloto.id).subscribe(()=>{
+        location.reload()
+        alert("Alta Exitosa")
+        location.reload
+      }, error =>{
+        console.error(error)
+      })
     })
   }
 }
