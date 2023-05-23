@@ -6,5 +6,5 @@ export class Driver{
     position : number
     carNumber : number    
     nationality : string
-    //team : Team
+    
 }

@@ -75,15 +75,16 @@ export class DriverListComponent implements OnInit{
 
     this.modalService.open(ver).result.then(() => {
       let piloto = new Driver()
+      piloto.id = p.id
       piloto.name = this.nameView
       piloto.lastName = this.lastNameView
       piloto.age = parseInt(this.ageView)
       piloto.carNumber = parseInt(this.carNumberView)
       piloto.position = parseInt(this.positionView)
       piloto.nationality = this.nationalityView
-      this.driverService.edit(piloto, piloto.id).subscribe(()=>{
+      this.driverService.edit(piloto, p.id).subscribe(()=>{
         location.reload()
-        alert("Alta Exitosa")
+        alert("Modificacion Exitosa")
         location.reload
       }, error =>{
         console.error(error)
