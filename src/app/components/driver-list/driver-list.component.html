@@ -1,4 +1,4 @@
-<table class="table table-striped"> 
+<table class="table table-dark"> 
     <thead>
         <tr>
             <td>NAME</td>
@@ -29,24 +29,32 @@
             <td>
                 {{driver.position}}
             </td>
-            <td>
-                <button (click)='view(ver,driver)'>View</button>
+            <td style = "width: 100px;">
+                <button  type="button" class="btn btn-primary" (click)='view(ver,driver)'>View</button>
             </td>
             <td>
-                <button (click)='delete(driver.id)'>X</button>
+                <button type="button" class="btn btn-danger" (click)='delete(driver.id)'>X</button>
             </td>
         </tr>
     </tbody>
     <tfoot>
-        <td><input [(ngModel)] = "inputName" placeholder="Name" name = "inputName"></td>
-        <td><input [(ngModel)] = "inputLastName" type="text" placeholder="LastName"></td>
-        <td><input [(ngModel)] = "inputAge" type="text" placeholder="Age"></td>
-        <td><input [(ngModel)] = "inputCarNumber" type="text" placeholder="CarNumber"></td>
-        <td><input [(ngModel)] = "inputNationality" type="text" placeholder="Nationality"></td>
-        <td><input [(ngModel)] = "inputPosition" type="text" placeholder="Position"></td>
-        <td><input [(ngModel)] = "inputTeam" type="text" placeholder="Team"></td>
-        
-        <button (click)='add()' class="addPiloto" >+</button>
+        <form [formGroup] = "driverForm">
+            <tr>
+                <td><input formControlName= "inputName" placeholder="Name"></td>
+                <td><input formControlName = "inputLastName" type="text" placeholder="LastName"></td>
+                <td><input formControlName = "inputAge" type="text" placeholder="Age"></td>
+                <td><input formControlName = "inputCarNumber" type="text" placeholder="CarNumber"></td>
+                <td><input formControlName = "inputNationality" type="text" placeholder="Nationality"></td>
+                <td><input formControlName = "inputPosition" type="text" placeholder="Position"></td>
+                <td><input formControlName= "inputTeam" type="text" placeholder="Team"></td>
+            </tr>
+            <tr>
+                <p *ngIf="name.errors['required']">Obligatorio</p>
+            </tr>
+           
+            
+            <button (click)='add()' class="addPiloto" >+</button>
+        </form>
     </tfoot>
 </table>
 

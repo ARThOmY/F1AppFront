@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DriverService } from 'src/app/services/driver.service';
 import {Driver} from 'src/app/models/driver';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormControl, Validators, ValidationErrors, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-driver-list',
@@ -13,13 +14,8 @@ export class DriverListComponent implements OnInit{
   constructor(private driverService : DriverService, private modalService : NgbModal){}
   public pilotos : Driver[] = []
 
-  inputName = ""
-  inputLastName = ""
-  inputAge : ""
-  inputCarNumber = ""
-  inputNationality = ""
-  inputPosition = ""
-  inputTeam = ""
+  driver = new Driver()
+  driverForm: FormGroup
 
   nameView = ""
   lastNameView = ""
@@ -29,15 +25,39 @@ export class DriverListComponent implements OnInit{
   positionView = ""
   teamView = ""
 
-
-
   ngOnInit(): void {
+
+    this.driver.name = ''
+    this.driver.age = 0
+    this.driver.carNumber = 0
+    this.driver.lastName = ""
+    this.driver.nationality = ""
+    this.driver.position = 0
+
+  
+    this.driverForm = new FormGroup({
+    'inputName' : new FormControl(this.driver.name, {validators: [Validators.required], updateOn: 'blur'}),
+    'inputLastName' : new FormControl(this.driver.name, {validators: [Validators.required], updateOn: 'blur'}), 
+    'inputAge' : new FormControl(this.driver.name, {validators: [Validators.required], updateOn: 'blur'}),'inputCarNumber' : new FormControl(this.driver.name, {validators: [Validators.required], updateOn: 'blur'}),
+    'inputNationality' : new FormControl(this.driver.name, {validators: [Validators.required], updateOn: 'blur'}),
+    'inputPosition' : new FormControl(this.driver.name, {validators: [Validators.required], updateOn: 'blur'}), 
+    'inputTeam' : new FormControl(this.driver.name, {validators: [Validators.required], updateOn: 'blur'})   })
+
       this.driverService.getAll().subscribe(response => {
         this.pilotos = response
       }, error =>{
         alert("Error")
       })
   }
+
+  get name(){return this.driverForm.get('inputName')}
+  get lastName(){return this.driverForm.get('inputLastName')}
+  get age(){return this.driverForm.get('inputAge')}
+  get carNumber(){return this.driverForm.get('inputCarNumber')}
+  get nationality(){return this.driverForm.get('inputNationality')}
+  get position(){return this.driverForm.get('inputPosition')}
+  get team(){return this.driverForm.get('inputTeam')}
+
 
   delete(id : number){
     this.driverService.delete(id).subscribe(()=>{
@@ -49,13 +69,13 @@ export class DriverListComponent implements OnInit{
   }
   add(){ 
     let piloto = new Driver()
-    piloto.name = this.inputName
-    piloto.lastName = this.inputLastName
-    piloto.age = parseInt(this.inputAge)
-    piloto.carNumber = parseInt(this.inputCarNumber)
-    piloto.position = parseInt(this.inputPosition)
-    piloto.nationality = this.inputNationality
-    this.driverService.add(piloto, parseInt(this.inputTeam) ).subscribe(()=>{
+    piloto.name = this.name.value
+    piloto.lastName = this.lastName.value
+    piloto.age = parseInt(this.age.value)
+    piloto.carNumber = parseInt(this.carNumber.value)
+    piloto.position = parseInt(this.position.value)
+    piloto.nationality = this.nationality.value
+    this.driverService.add(piloto, parseInt(this.team.value) ).subscribe(()=>{
       location.reload()
       alert("Alta Exitosa")
       location.reload
