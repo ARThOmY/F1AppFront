@@ -37,26 +37,27 @@
             </td>
         </tr>
     </tbody>
-    <tfoot>
-        <form [formGroup] = "driverForm">
-            <tr>
-                <td><input formControlName= "inputName" placeholder="Name"></td>
-                <td><input formControlName = "inputLastName" type="text" placeholder="LastName"></td>
-                <td><input formControlName = "inputAge" type="text" placeholder="Age"></td>
-                <td><input formControlName = "inputCarNumber" type="text" placeholder="CarNumber"></td>
-                <td><input formControlName = "inputNationality" type="text" placeholder="Nationality"></td>
-                <td><input formControlName = "inputPosition" type="text" placeholder="Position"></td>
-                <td><input formControlName= "inputTeam" type="text" placeholder="Team"></td>
-            </tr>
-            <tr>
-                <p *ngIf="name.errors['required']">Obligatorio</p>
-            </tr>
-           
-            
-            <button (click)='add()' class="addPiloto" >+</button>
-        </form>
-    </tfoot>
 </table>
+
+<form [formGroup] = "driverForm">
+    <table class="table table-striped">
+        <tr>
+            <td><input formControlName= "inputName" placeholder="Name"></td>
+            <td><input formControlName = "inputLastName" type="text" placeholder="LastName"></td>
+            <td><input formControlName = "inputAge" type="text" placeholder="Age"></td>
+            <td><input formControlName = "inputCarNumber" type="text" placeholder="CarNumber"></td>
+            <td><input formControlName = "inputNationality" type="text" placeholder="Nationality"></td>
+            <td><input formControlName = "inputPosition" type="text" placeholder="Position"></td>
+            <td><input formControlName= "inputTeam" type="text" placeholder="Team"></td>
+            <td><button (click)='add()' class="addPiloto" >+</button></td>
+        </tr>
+        <tr>
+            <p *ngIf="name.errors['required']" style="color: red;">Obligatorio</p>
+        </tr>
+        
+    </table>
+    
+</form>
 
 <ng-template #ver let-modal>
     <div>
