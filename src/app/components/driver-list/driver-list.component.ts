@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DriverService } from 'src/app/services/driver.service';
 import {Driver} from 'src/app/models/driver';
+import {Team} from 'src/app/models/teams';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, Validators, ValidationErrors, FormGroup } from '@angular/forms';
 
@@ -13,6 +14,7 @@ export class DriverListComponent implements OnInit{
 
   constructor(private driverService : DriverService, private modalService : NgbModal){}
   public pilotos : Driver[] = []
+  public teamList : Team[] = []
 
   driver = new Driver()
   driverForm: FormGroup

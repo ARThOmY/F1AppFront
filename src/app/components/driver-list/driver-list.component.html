@@ -30,7 +30,7 @@
                 {{driver.position}}
             </td>
             <td style = "width: 100px;">
-                <button  type="button" class="btn btn-primary" (click)='view(ver,driver)'>View</button>
+                <button  type="button" class="btn btn-primary" (click)='view(ver,driver)'>Edit</button>
             </td>
             <td>
                 <button type="button" class="btn btn-danger" (click)='delete(driver.id)'>X</button>
@@ -39,7 +39,7 @@
     </tbody>
 </table>
 
-<form [formGroup] = "driverForm">
+<form [formGroup] = "driverForm" style="max-width: 100%;">
     <table class="table table-striped">
         <tr>
             <td><input formControlName= "inputName" placeholder="Name"></td>
@@ -48,8 +48,10 @@
             <td><input formControlName = "inputCarNumber" type="text" placeholder="CarNumber"></td>
             <td><input formControlName = "inputNationality" type="text" placeholder="Nationality"></td>
             <td><input formControlName = "inputPosition" type="text" placeholder="Position"></td>
-            <td><input formControlName= "inputTeam" type="text" placeholder="Team"></td>
-            <td><button (click)='add()' class="addPiloto" >+</button></td>
+            <td><select name="" class="form-control" formControlName= "inputTeam">
+                <option *ngFor="let team of teamList" [value]="team.teamId"></option>
+            </select></td>
+            <td><button (click)='add()' class="addPiloto" class="btn btn-outline-success">Agregar</button></td>
         </tr>
         <tr>
             <p *ngIf="name.errors['required']" style="color: red;">Obligatorio</p>
@@ -60,28 +62,27 @@
 </form>
 
 <ng-template #ver let-modal>
-    <div>
-        <h2>Modificar Piloto</h2>
-        <button (click)="modal.dismiss()">X</button>
-    </div>
-    <div>
-        <table>
-            <tbody>
-                <tr>
-                    <td><input [(ngModel)] = "nameView" placeholder="Name"></td>
-                    <td><input [(ngModel)] = "lastNameView" type="text" placeholder="LastName"></td>
-                    <td><input [(ngModel)] = "ageView" type="text" placeholder="Age"></td>
-                    <td><input [(ngModel)] = "carNumberView" type="text" placeholder="CarNumber"></td>
-                    <td><input [(ngModel)] = "nationalityView" type="text" placeholder="Nationality"></td>
-                    <td><input [(ngModel)] = "positionView" type="text" placeholder="Position"></td>
-                    <td><input [(ngModel)] = "teamView" type="text" placeholder="Team"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div>
-        <button (click)="modal.close()">Guardar</button>
-
+    <div id="exampleModal" tabindex="-1"  aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Modificar Piloto</h2>
+                    <button type="button" class="btn btn-danger" (click)="modal.dismiss()">X</button>
+                </div>
+                <div class="modal-body">
+                    <input [(ngModel)] = "nameView" placeholder="Name">
+                    <input [(ngModel)] = "lastNameView" type="text" placeholder="LastName">
+                    <input [(ngModel)] = "ageView" type="text" placeholder="Age">
+                    <input [(ngModel)] = "carNumberView" type="text" placeholder="CarNumber">
+                    <input [(ngModel)] = "nationalityView" type="text" placeholder="Nationality">
+                    <input [(ngModel)] = "positionView" type="text" placeholder="Position">
+                    <input [(ngModel)] = "teamView" type="text" placeholder="Team">  
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-success" (click)="modal.close()">Guardar</button>
+                </div>
+            </div>
+        </div>
     </div>
 </ng-template>
 
