@@ -48,8 +48,8 @@
             <td><input formControlName = "inputCarNumber" type="text" placeholder="CarNumber"></td>
             <td><input formControlName = "inputNationality" type="text" placeholder="Nationality"></td>
             <td><input formControlName = "inputPosition" type="text" placeholder="Position"></td>
-            <td><select name="" class="form-control" formControlName= "inputTeam">
-                <option *ngFor="let team of teamList" [value]="team.teamId"></option>
+            <td><select formControlName="teamId" class="form-control">
+                <option *ngFor="let team of teamList" [value]="team.id">{{team.name}}</option>
             </select></td>
             <td><button (click)='add()' class="addPiloto" class="btn btn-outline-success">Agregar</button></td>
         </tr>

@@ -1,5 +1,5 @@
 export class Team{
-    teamId : number
+    id : number
     name : string
     car : string  
     location : string

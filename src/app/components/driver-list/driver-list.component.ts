@@ -4,6 +4,7 @@ import {Driver} from 'src/app/models/driver';
 import {Team} from 'src/app/models/teams';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, Validators, ValidationErrors, FormGroup } from '@angular/forms';
+import { TeamService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-driver-list',
@@ -12,12 +13,13 @@ import { FormControl, Validators, ValidationErrors, FormGroup } from '@angular/f
 })
 export class DriverListComponent implements OnInit{
 
-  constructor(private driverService : DriverService, private modalService : NgbModal){}
+  constructor(private driverService : DriverService, private modalService : NgbModal, private teamService : TeamService){}
   public pilotos : Driver[] = []
   public teamList : Team[] = []
 
   driver = new Driver()
   driverForm: FormGroup
+  team_id = 0
 
   nameView = ""
   lastNameView = ""
@@ -42,14 +44,24 @@ export class DriverListComponent implements OnInit{
     'inputLastName' : new FormControl(this.driver.name, {validators: [Validators.required], updateOn: 'blur'}), 
     'inputAge' : new FormControl(this.driver.name, {validators: [Validators.required], updateOn: 'blur'}),'inputCarNumber' : new FormControl(this.driver.name, {validators: [Validators.required], updateOn: 'blur'}),
     'inputNationality' : new FormControl(this.driver.name, {validators: [Validators.required], updateOn: 'blur'}),
-    'inputPosition' : new FormControl(this.driver.name, {validators: [Validators.required], updateOn: 'blur'}), 
-    'inputTeam' : new FormControl(this.driver.name, {validators: [Validators.required], updateOn: 'blur'})   })
+    'inputPosition' : new FormControl(this.driver.name, {validators: [Validators.required], updateOn: 'blur'}),
+    'teamId' : new FormControl(this.team_id) 
+  })
 
-      this.driverService.getAll().subscribe(response => {
-        this.pilotos = response
-      }, error =>{
-        alert("Error")
-      })
+  
+    this.driverService.getAll().subscribe(response => {
+      console.log(response)
+      this.pilotos = response
+    }, error =>{
+      alert("Error")
+    })
+
+    this.teamService.getAll().subscribe(response =>{
+      console.log(response)
+      this.teamList = response
+    },error =>{
+      alert("Error al obtener los equipos")
+    })  
   }
 
   get name(){return this.driverForm.get('inputName')}
@@ -58,7 +70,7 @@ export class DriverListComponent implements OnInit{
   get carNumber(){return this.driverForm.get('inputCarNumber')}
   get nationality(){return this.driverForm.get('inputNationality')}
   get position(){return this.driverForm.get('inputPosition')}
-  get team(){return this.driverForm.get('inputTeam')}
+  get team(){return this.driverForm.get('teamId')}
 
 
   delete(id : number){
@@ -69,7 +81,7 @@ export class DriverListComponent implements OnInit{
       console.error(error)
     })
   }
-  add(){ 
+  add(){
     let piloto = new Driver()
     piloto.name = this.name.value
     piloto.lastName = this.lastName.value
