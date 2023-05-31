@@ -19,7 +19,7 @@ export class DriverListComponent implements OnInit{
 
   driver = new Driver()
   driverForm: FormGroup
-  team_id = 0
+  team_id 
 
   nameView = ""
   lastNameView = ""
