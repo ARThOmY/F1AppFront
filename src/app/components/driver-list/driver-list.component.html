@@ -62,21 +62,21 @@
         <tbody>
             <tr>
                 <td style="width: 15%;"><input formControlName= "inputName" placeholder="Name" class="form-control">
-                    <p *ngIf="name.touched && name.errors['required']" style="color: red;">* Obligatorio</p></td>
+                    <p *ngIf="name.touched && name.errors && name.errors['required']" style="color: red;">* Obligatorio</p></td>
                 <td style="width: 15%;"><input formControlName = "inputLastName" type="text" placeholder="LastName" class="form-control">
-                    <p *ngIf="lastName.touched && lastName.errors['required']" style="color: red;">* Obligatorio</p>
+                    <p *ngIf="lastName.touched && lastName.errors && lastName.errors['required']" style="color: red;">* Obligatorio</p>
                 </td>
                 <td style="width: 10%;"><input formControlName = "inputAge" type="text" placeholder="Age" class="form-control">
-                    <p *ngIf="age.touched && age.errors['required']" style="color: red;">* Obligatorio</p>
+                    <p *ngIf="age.touched && age.errors && age.errors['required']" style="color: red;">* Obligatorio</p>
                 </td>
                 <td style="width: 15%;"><input formControlName = "inputCarNumber" type="text" placeholder="CarNumber" class="form-control">
-                    <p *ngIf="carNumber.touched && carNumber.errors['required']" style="color: red;">* Obligatorio</p>
+                    <p *ngIf="carNumber.touched && carNumber.errors && carNumber.errors['required']" style="color: red;">* Obligatorio</p>
                 </td>
                 <td style="width: 15%;"><input formControlName = "inputNationality" type="text" placeholder="Nationality" class="form-control">
-                    <p *ngIf="nationality.touched && nationality.errors['required']" style="color: red;">* Obligatorio</p>
+                    <p *ngIf="nationality.touched && nationality.errors && nationality.errors['required']" style="color: red;">* Obligatorio</p>
                 </td>
                 <td style="width: 10%;"><input formControlName = "inputPosition" type="text" placeholder="Position" class="form-control">
-                    <p *ngIf="position.touched && position.errors['required']" style="color: red;">* Obligatorio</p>
+                    <p *ngIf="position.touched && position.errors && position.errors['required']" style="color: red;">* Obligatorio</p>
                     
                 </td>
                 <td>
