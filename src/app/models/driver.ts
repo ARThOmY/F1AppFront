@@ -5,6 +5,5 @@ export class Driver{
     age : number
     position : number
     carNumber : number    
-    nationality : string
-    
+    nationality : string    
 }

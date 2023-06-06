@@ -21,7 +21,7 @@ export class DriverService {
   add(piloto : Driver, teamId : number) : Observable<any>{
     return this.http.post(this.url + "/" + teamId + "/add",piloto)
   }
-  edit(p : Driver, id : Number) : Observable<any>{
-    return this.http.post(this.url + "/" + id +"/update",p)
+  edit(p : Driver, id : Number, team_id : Number) : Observable<any>{
+    return this.http.post(this.url + "/" + id + '/' +  team_id + "/update",p)
   }
 }
